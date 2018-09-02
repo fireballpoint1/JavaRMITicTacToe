@@ -15,6 +15,7 @@ public class ClientReaction {
     }
     
     public void setClientGame(ClientGame clientGame) {
+        System.out.println("clientGame="+clientGame);
         this.clientGame = clientGame;
     }
     
@@ -93,17 +94,28 @@ public class ClientReaction {
         }
     }
     
-    public void gameStart() {
-        mainWindow.displayStatus(Text.GAME_STARTED, true);
+    public void gameStart(int x) {
+        if(x==1)
+            mainWindow.displayStatus(Text.GAME_STARTED_X, true);
+        else if(x==0)
+            mainWindow.displayStatus(Text.GAME_STARTED_O, true);
+
         mainWindow.showGameView();
     }
     
-    public void yourTurn() {
-        mainWindow.displayStatus(Text.YOUR_TURN, false);
+    public void yourTurn(int x) {
+        if(x==1)
+            mainWindow.displayStatus(Text.YOUR_TURN_X, false);
+        else if(x==0)
+            mainWindow.displayStatus(Text.YOUR_TURN_O, false);
     }
     
-    public void enemyTurn() {
-        mainWindow.displayStatus(Text.ENEMY_TURN, false);
+    public void enemyTurn(int x) {
+        if(x==1)
+            mainWindow.displayStatus(Text.ENEMY_TURN_X, false);
+        else
+            mainWindow.displayStatus(Text.ENEMY_TURN_O, false);
+            
     }
     
     public void hit(int x, int y) {        
@@ -205,4 +217,5 @@ public class ClientReaction {
         mainWindow.displayStatus(Text.ENEMY_DISCONNECTED, true);
         mainWindow.showPlayAgain();
     }
+
 }

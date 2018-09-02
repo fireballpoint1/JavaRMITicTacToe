@@ -5,7 +5,7 @@ import server.game.*;
 import java.nio.*;
 
 public class ServerGame extends Game {
-    private final int boardSize = 1;
+    private final int boardSize = 3;
     private final int[][] shipsParams = new int[][]{
 //        {2, 4}, // 2 ships with 4 fields
 //        {2, 3}, // 2 ships with 3 fields
@@ -28,7 +28,9 @@ public class ServerGame extends Game {
         playerA.board = new Board(boardSize);
         playerB.board = new Board(boardSize);
         playerA.board.placeShips(shipsParams);
+//        playerA.board.createBoard(shipsParams);
         playerB.board.placeShips(shipsParams);
+//        playerB.board.createBoard(shipsParams);
         sendConfiguration(playerA);
         sendConfiguration(playerB);
     }
@@ -88,17 +90,17 @@ public class ServerGame extends Game {
         player.isReady = true;
         
         if (playerA.isReady && playerB.isReady) {
-            playerA.connection.prepareMessage(MessageType.GAME_START);
-            playerB.connection.prepareMessage(MessageType.GAME_START);
+            playerA.connection.prepareMessage(MessageType.GAME_START_X);
+            playerB.connection.prepareMessage(MessageType.GAME_START_O);
             
             if (Math.random() < 0.5d) {
                 setTurnA();
-                playerA.connection.prepareMessage(MessageType.YOUR_TURN);
-                playerB.connection.prepareMessage(MessageType.ENEMY_TURN);
+                playerA.connection.prepareMessage(MessageType.YOUR_TURN_X);
+                playerB.connection.prepareMessage(MessageType.ENEMY_TURN_O);
             } else {
                 setTurnB();
-                playerB.connection.prepareMessage(MessageType.YOUR_TURN);
-                playerA.connection.prepareMessage(MessageType.ENEMY_TURN);
+                playerB.connection.prepareMessage(MessageType.YOUR_TURN_O);
+                playerA.connection.prepareMessage(MessageType.ENEMY_TURN_X);
             }
             playerA.connection.send();
             playerB.connection.send();
@@ -130,9 +132,9 @@ public class ServerGame extends Game {
             } else {
                 changeTurn();
                 player.connection.prepareMessage(MessageType.MISSED, data);
-                player.connection.prepareMessage(MessageType.ENEMY_TURN);
+                player.connection.prepareMessage(MessageType.ENEMY_TURN_O);
                 secondPlayer.connection.prepareMessage(MessageType.ENEMY_MISSED, data);
-                secondPlayer.connection.prepareMessage(MessageType.YOUR_TURN);
+                secondPlayer.connection.prepareMessage(MessageType.YOUR_TURN_X);
             }
         } else {
             player.connection.prepareMessage(MessageType.INVALID_SHOT);
@@ -142,6 +144,17 @@ public class ServerGame extends Game {
     }
     
     private ByteBuffer createSunkData(Ship sunkShip) {        
+        ByteBuffer sunkData = ByteBuffer.allocate(8 * Integer.BYTES);
+        for (int val : sunkShip.getPosition()) {
+            sunkData.putInt(val);
+        }
+        for (int val : sunkShip.getArea()) {
+            sunkData.putInt(val);
+        }
+        return sunkData;
+    }
+    // createSunkData function for tic tac toe
+    private ByteBuffer createShotData(Ship sunkShip) {        
         ByteBuffer sunkData = ByteBuffer.allocate(8 * Integer.BYTES);
         for (int val : sunkShip.getPosition()) {
             sunkData.putInt(val);

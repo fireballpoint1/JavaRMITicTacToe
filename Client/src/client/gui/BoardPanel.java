@@ -9,11 +9,13 @@ import javax.imageio.*;
 import javax.swing.*;
 
 public class BoardPanel extends JPanel {
-    private final int width = 10;
-    private final int fieldSize = 26;
+    private final int width = 3;
+    private final int fieldSize = 100;
     private final int fieldStrokeSize = 1;
     private final Color cFieldStroke = new Color(64, 64, 64);
     
+    private BufferedImage imgCross;
+    private BufferedImage imgZero;
     private BufferedImage imgSea;
     private BufferedImage imgSplash;
     private BufferedImage imgFire;
@@ -22,6 +24,7 @@ public class BoardPanel extends JPanel {
     private BufferedImage imgShipProwV;
     private BufferedImage imgShipBoardH;
     private BufferedImage imgShipBoardV;
+    
     
     private int[][] shipsFields = new int[width][width];
     private boolean[][] shotsFields = new boolean[width][width];
@@ -33,7 +36,10 @@ public class BoardPanel extends JPanel {
         setPreferredSize(new Dimension(realWidth, realWidth));
         
         try {
-            imgSea = ImageIO.read(Client.class.getResource("/gfx/sea.png"));
+            imgCross=ImageIO.read(Client.class.getResource("/gfx/cross.jpeg"));
+            imgZero=ImageIO.read(Client.class.getResource("/gfx/zero.png"));
+
+            imgSea = ImageIO.read(Client.class.getResource("/gfx/white_sea.jpg"));
             imgSplash = ImageIO.read(Client.class.getResource("/gfx/splash.png")); 
             imgFire = ImageIO.read(Client.class.getResource("/gfx/fire.png"));
             imgShipReveal = ImageIO.read(Client.class.getResource("/gfx/shipReveal.png"));
@@ -72,7 +78,15 @@ public class BoardPanel extends JPanel {
                 g2d.setColor(cFieldStroke);
                 g2d.setStroke(new BasicStroke(fieldStrokeSize));
                 g2d.drawRect(x, y, fieldSize, fieldSize);
-                g2d.drawImage(imgSea, x + fieldStrokeSize, y + fieldStrokeSize, 25, 25, this);
+                //
+//                float[] scales = { 1f, 1f, 1f, 0.5f };
+//                float[] offsets = new float[4];
+//                RescaleOp rop = new RescaleOp(scales, offsets, null);
+                //
+                g2d.drawImage(imgSea, x + fieldStrokeSize, y + fieldStrokeSize, 99, 99, this);
+//                g2d.drawImage(imgSea,rop, 99, 99,this);
+
+
             }
         }
         
@@ -110,7 +124,7 @@ public class BoardPanel extends JPanel {
                         }
                     }
                     
-                    g2d.drawImage(imgShip, x + fieldStrokeSize, y + fieldStrokeSize, 25, 25, this);
+                    g2d.drawImage(imgShip, x + fieldStrokeSize, y + fieldStrokeSize, 0, 0, this);
                 }
             }
         }
@@ -122,8 +136,8 @@ public class BoardPanel extends JPanel {
                 if (shotsFields[j][i]) {
                     int x = j * fieldSize;
                     int y = i * fieldSize;
-                    BufferedImage imgShot = shipsFields[j][i] != 0 ? imgFire : imgSplash;
-                    g2d.drawImage(imgShot, x + fieldStrokeSize, y + fieldStrokeSize, 25, 25, this);
+                    BufferedImage imgShot = shipsFields[j][i] != 0 ? imgCross : imgZero;
+                    g2d.drawImage(imgShot, x + fieldStrokeSize, y + fieldStrokeSize, 99, 99, this);
                 }
             }
         }

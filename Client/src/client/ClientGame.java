@@ -35,18 +35,32 @@ public class ClientGame extends Game {
                 clientReaction.configuration(positions);
                 break;
             }
-            case MessageType.GAME_START: {
-                clientReaction.gameStart();
+            case MessageType.GAME_START_X: {
+                clientReaction.gameStart(1);
                 break;
             }
-            case MessageType.YOUR_TURN: {
+            case MessageType.GAME_START_O: {
+                clientReaction.gameStart(0);
+                break;
+            }
+            case MessageType.YOUR_TURN_X: {
                 setTurnA();
-                clientReaction.yourTurn();
+                clientReaction.yourTurn(1);
                 break;
             }
-            case MessageType.ENEMY_TURN: {
+            case MessageType.YOUR_TURN_O: {
+                setTurnA();
+                clientReaction.yourTurn(0);
+                break;
+            }
+            case MessageType.ENEMY_TURN_X: {
                 setTurnB();
-                clientReaction.enemyTurn();
+                clientReaction.enemyTurn(1);
+                break;
+            }
+            case MessageType.ENEMY_TURN_O: {
+                setTurnB();
+                clientReaction.enemyTurn(0);
                 break;
             }
             case MessageType.HIT: {

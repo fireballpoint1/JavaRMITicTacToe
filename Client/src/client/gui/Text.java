@@ -22,16 +22,23 @@ public class Text {
     public static final String GAME_STARTED = "Game has been started";
     public static final String YOUR_TURN = "Your turn!";
     public static final String ENEMY_TURN = "Enemy turn!";
-    public static final String HIT = "You just hit the enemy ship!";
-    public static final String ENEMY_HIT = "Enemy just hit your ship!";
-    public static final String MISSED = "You missed";
+    public static final String HIT = "tic !";
+    public static final String ENEMY_HIT = "tac !";
+    public static final String MISSED = "tic";
     public static final String ENEMY_MISSED = "Enemy missed";
-    public static final String SUNK = "You just sunk the enemy ship!";
-    public static final String ENEMY_SUNK = "Enemy just sunk your ship!";
+    public static final String SUNK = "TIC TAC TOE !";
+    public static final String ENEMY_SUNK = "TIC TAC TOE-D!";
     public static final String YOU_WON = "You won!";
     public static final String YOU_LOST = "You lost...";
     public static final String ENEMY_DISCONNECTED = "Enemy disconnected";
-    public static final String ALL_SHIPS_SANK = "all ships sunk";
-    public static final String SHIP_LEFT = " ship left";
-    public static final String SHIPS_LEFT = " ships left";
+    public static final String ALL_SHIPS_SANK = "yayy";
+    public static final String SHIP_LEFT = " ";
+    public static final String SHIPS_LEFT = " ";
+    public static final String YOUR_TURN_O = "O your turn!";
+    public static final String YOUR_TURN_X = "X your turn!";
+    public static final String ENEMY_TURN_O = "O enemy turn!";
+    public static final String ENEMY_TURN_X = "X enemy turn!";
+    public static final String GAME_STARTED_X="X Game has been started";
+    public static final String GAME_STARTED_O="O Game has been started";
+
 }

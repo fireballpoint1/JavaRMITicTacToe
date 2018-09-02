@@ -33,13 +33,31 @@ public class Board {
             int copies = shipParam[0];
             int length = shipParam[1];
             for (int i = 0; i < copies; i++) {
-                placeShip(length);
+                placeMarks(length);
             }
         }
         remainingShips = ships.size();
     }
     
     private void placeShip(int length) {
+        int x, y;
+        boolean vertical;
+        do {
+            x = (int) (Math.random() * (size + 1 - length));
+            y = (int) (Math.random() * size);
+            
+            vertical = Math.random() < 0.5d;
+            if (vertical) {
+                int xT = x;
+                x = y;
+                y = xT;
+            }
+        } while (!isFreeSpace(x, y, length, vertical));
+        
+        ships.add(new Ship(x, y, length, vertical, size));
+    }
+    // placeShip function for tic tac toe
+    private void placeMarks(int length) {
         int x, y;
         boolean vertical;
         do {

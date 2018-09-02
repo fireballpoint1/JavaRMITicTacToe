@@ -21,4 +21,11 @@ public class MessageType {
     public final static int ENEMY_SUNK = 18;
     public final static int YOU_WON = 19;
     public final static int YOU_LOST = 20;
+    public final static int YOUR_TURN_O=21;
+    public final static int ENEMY_TURN_X=22;
+    public final static int ENEMY_TURN_O=23;
+    public final static int YOUR_TURN_X=24;
+    public final static int GAME_START_X=25;
+    public final static int GAME_START_O=26;
+    
 }

@@ -46,7 +46,7 @@ public class MainWindow {
         menuPanel.getPanel().setBorder(new LineBorder(Color.LIGHT_GRAY, 1));
         
         try {
-            imgBackground = ImageIO.read(Client.class.getResource("/gfx/background.png"));
+            imgBackground = ImageIO.read(Client.class.getResource("/gfx/background.jpeg"));
         } catch (IOException ex) {
             //ex.printStackTrace();
         }
@@ -66,6 +66,7 @@ public class MainWindow {
         pCenter.setBorder(new LineBorder(Color.LIGHT_GRAY, 1));
         
         lStatus = new JLabel(Text.CONNECT_TO_SERVER);
+        System.out.println("lstatus"+Text.CONNECT_TO_SERVER);
         lStatus.setFont(new Font(lStatus.getFont().getName(), Font.BOLD, 18));
         lStatus.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         
@@ -113,8 +114,8 @@ public class MainWindow {
     }
     
     public void displayStatus(String text, boolean immediately) {
-        timer.cancel();
-        timer.purge();
+        timer.cancel(); //cancels tasts
+        timer.purge();  //remove cancelled tasks from queue
         
         if (immediately) {
             lStatus.setText(text);
