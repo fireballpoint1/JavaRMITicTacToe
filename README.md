@@ -7,3 +7,9 @@ The client application may be possible to launch with a double click but this de
 
 ### Building
 Open Server, Client and Common projects in NetBeans IDE, then build Server and Client projects. Common project should be automatically used as a library for them. Executables will be deployed inside dist directories along with shared library.
+
+### Implemented
+
+* RMI
+* Multiple Playing Pairs
+* Interactive UI
